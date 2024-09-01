@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { Moon, ShoppingCart } from "lucide-react";
 import { useState } from "react";
+import { useAppSelector } from "@/redux/hooks";
 const Navbar = () => {
+  const products = useAppSelector((store) => store.cart.products);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -42,13 +44,21 @@ const Navbar = () => {
                 <ShoppingCart size={28} />
               </Link>
               <span className="rounded-full absolute top-[-10px] left-[20px] bg-primary text-white text-center size-[25px]">
-                products.length
+                {products.length}
               </span>
             </li>
             <li>
               <button className="bg-gradient-to-r from-blue-200  to-blue-400 rounded-lg shadow-xl font-semibold text-white text-xl backdrop-blur-[2px] py-2 px-4  transition-transform transform hover:scale-105 hover:shadow-2xl  inline-block ">
                 <Moon size={28} />
               </button>
+            </li>
+            <li>
+              <Link
+                className="bg-gradient-to-r from-emerald-200  to-blue-700 rounded-lg shadow-xl font-semibold text-white text-xl backdrop-blur-[2px] p-2 transition-transform hover:scale-105 hover:shadow-2xl  inline-block hover:bg-green-700  duration-300  "
+                to={"/login"}
+              >
+                Login
+              </Link>
             </li>
           </ul>
         </div>

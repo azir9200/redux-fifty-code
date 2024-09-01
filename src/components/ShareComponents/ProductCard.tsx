@@ -2,8 +2,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import Modal from "./Modal";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/features/cartSlice";
+// import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const ProductCard = ({ product }: { product: any }) => {
+  const dispatch = useAppDispatch();
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -16,7 +21,10 @@ const ProductCard = ({ product }: { product: any }) => {
     setSelectedProduct(null);
     setShowModal(false);
   };
-  const handleAddToCart = (product) => {};
+  const handleAddToCart = (product: any) => {
+    dispatch(addToCart(product));
+    toast.success(`${product.name} added to cart!`); 
+  };
 
   return (
     <div className="relative">
@@ -51,7 +59,6 @@ const ProductCard = ({ product }: { product: any }) => {
               onClick={(e) => {
                 e.stopPropagation();
                 handleAddToCart(product);
-                console.log(product, "azir ");
               }}
               className="bg-blue-400 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-800 transition duration-300 shadow-md hover:shadow-lg"
             >
