@@ -6,7 +6,7 @@ const orderApi = baseApi.injectEndpoints({
         query: (data) => {
           return {
             method: "POST",
-            url: `/order/create-order`,
+            url: `/order/create`,
             body: data,
           };
         }

@@ -55,6 +55,7 @@ export const products = [
     image: "https://i.ibb.co/cNRWZt3/proPic1.png",
     ratings: 2,
   },
+
   {
     id: 8,
     name: "Portable Charger",
@@ -79,6 +80,30 @@ export const products = [
     image: "https://i.ibb.co/gPzpwMy/proPic7.png",
     ratings: 3,
   },
+  {
+    id: 11,
+    name: "Wireless Earbuds",
+    description: "Comfortable wireless earbuds with noise-cancellation.",
+    price: "129.99",
+    image: "https://i.ibb.co/w7PKmPC/priPic3.png",
+    ratings: 6,
+  },
+  {
+    id: 12,
+    name: "Smartphone Case",
+    description: "Durable case for your smartphone with a sleek design.",
+    price: "29.99",
+    image: "https://i.ibb.co/r3XyJZ0/proPic4.png",
+    ratings: 7,
+  },
+  {
+    id: 13,
+    name: "Gaming Mouse",
+    description: "High-precision gaming mouse with customizable buttons.",
+    price: "69.99",
+    image: "https://i.ibb.co/dGYLycx/proPic5.png",
+    ratings: 9,
+  }
 ];
 const getAllProducts = () => {
   return products;
