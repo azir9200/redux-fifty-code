@@ -1,11 +1,15 @@
 import { CreditCard, Trash2 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { clearCart } from "../../redux/features/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const OrderSummary = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { tax, taxRate, grandTotal, totalPrice, selectedItems } =
     useAppSelector((store) => store.cart);
+
+    // clear cart
   const handleClearCart = () => {
     dispatch(clearCart());
   };
@@ -13,9 +17,11 @@ const OrderSummary = () => {
     <div className=" lg:w-80 w-full h-full rounded">
       <div className="px-6 py-4 space-y-10">
         <h1 className="text-3xl font-bold text-dark">Order Summary</h1>
+
         <p className="text-sm text-dark mt-2">
           Selected Items : {selectedItems}
         </p>
+        
         <p className="text-sm text-dark mt-2">
           Total Price : ${totalPrice.toFixed(2)}
         </p>
@@ -41,6 +47,7 @@ const OrderSummary = () => {
         <button
           onClick={(e) => {
             e.stopPropagation();
+            navigate("/checkout");
           }}
           className="bg-green-600 px-3 py-2 text-white  mt-2 rounded-md w-full text-xs flex justify-between items-center"
         >

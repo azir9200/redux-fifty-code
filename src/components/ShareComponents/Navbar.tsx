@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Moon, ShoppingCart } from "lucide-react";
-import { useState } from "react";
+import { FaUser } from "react-icons/fa";
 import { useAppSelector } from "@/redux/hooks";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const Navbar = () => {
   const products = useAppSelector((store) => store.cart.products);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,58 +15,135 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-gradient-to-r from-blue-200  to-gray-400 rounded-sm px-3">
-      <nav className="container mx-auto flex items-center justify-between space-x-10 py-4 ">
+    <header className="bg-green-700 text-white rounded-sm fixed top-0 left-0 w-full z-50">
+      <nav className="container mx-auto flex items-center justify-between space-x-10 py-4">
         <Link to={"/"}>
-          <p className="text-4xl rounded-lg  text-green-200">logo </p>
-          <div className="text-4xl  text-green-600">logo one</div>
+          <h1>Eshadhin</h1>
+          {/* <img src={Eshadhin} alt="Eshadhin Logo" className="w-28" /> */}
         </Link>
-        <div className=" md:flex items-center space-x-5">
+
+        <div className="hidden md:flex items-center space-x-5">
           <ul className="flex items-center space-x-5">
             <li>
               <Link
-                className="bg-gradient-to-r from-emerald-200  to-blue-700 rounded-lg shadow-xl font-semibold text-white text-xl backdrop-blur-[2px] p-2 transition-transform hover:scale-105 hover:shadow-2xl  inline-block hover:bg-green-700  duration-300  "
+                className="rounded-lg backdrop-blur-[2px] p-1 inline-block"
                 to={"/products"}
               >
                 Products
               </Link>
             </li>
-
             <li>
-              <Link
-                className="bg-gradient-to-r from-emerald-200  to-blue-700 rounded-lg shadow-xl font-semibold text-white text-xl backdrop-blur-[2px] p-2 transition-transform transform hover:scale-105 hover:shadow-2xl  inline-block "
-                to={"/about"}
+              <a
+                className="rounded-lg backdrop-blur-[2px] p-1 inline-block"
+                href="#"
               >
                 About
-              </Link>
+              </a>
             </li>
             <li className="relative">
               <Link
-                className="bg-gradient-to-r from-emerald-200  to-blue-700 rounded-lg shadow-xl font-semibold text-white text-xl backdrop-blur-[2px] py-2 px-4 transition-transform transform hover:scale-105 hover:shadow-2xl  inline-block "
+                className="rounded-lg backdrop-blur-[2px] p-1 inline-block"
                 to={"/cart"}
               >
-                <ShoppingCart size={28} />
+                <ShoppingCart size={24} />
               </Link>
               <span className="rounded-full absolute top-[-10px] left-[20px] bg-primary text-white text-center size-[25px]">
                 {products.length}
               </span>
             </li>
+
             <li>
-              <button className="bg-gradient-to-r from-blue-200  to-blue-400 rounded-lg shadow-xl font-semibold text-white text-xl backdrop-blur-[2px] py-2 px-4  transition-transform transform hover:scale-105 hover:shadow-2xl  inline-block ">
-                <Moon size={28} />
+              <button
+                // onClick={handleToggleTheme}
+                className="rounded-lg backdrop-blur-[2px] p-1 inline-block"
+              >
+                <Moon size={24} />
               </button>
             </li>
             <li>
-              <Link
-                className="bg-gradient-to-r from-emerald-200  to-blue-700 rounded-lg shadow-xl font-semibold text-white text-xl backdrop-blur-[2px] p-2 transition-transform hover:scale-105 hover:shadow-2xl  inline-block hover:bg-green-700  duration-300  "
-                to={"/login"}
-              >
-                Login
+              <Link to="/login" className="text-white hover:text-black">
+                <FaUser size={24} />
               </Link>
             </li>
           </ul>
         </div>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center">
+          <button
+            onClick={handleMenuToggle}
+            className="text-white focus:outline-none"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {isMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
       </nav>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <ul className="md:hidden flex flex-col items-center space-y-5 mt-4">
+          <li>
+            <Link
+              className="rounded-lg backdrop-blur-[2px] p-1 inline-block"
+              to={"/products"}
+              onClick={handleMenuToggle}
+            >
+              Products
+            </Link>
+          </li>
+          <li>
+            <a
+              className="rounded-lg backdrop-blur-[2px] p-1 inline-block"
+              href="#"
+              onClick={handleMenuToggle}
+            >
+              About
+            </a>
+          </li>
+          <li className="relative">
+            <Link
+              className="rounded-lg backdrop-blur-[2px] p-1 inline-block"
+              to={"/cart"}
+              onClick={handleMenuToggle}
+            >
+              <ShoppingCart size={24} />
+            </Link>
+            <span className="rounded-full absolute top-[-10px] left-[20px] bg-primary text-white text-center size-[25px]">
+              2
+            </span>
+          </li>
+          <li>
+            <button
+              // onClick={handleToggleTheme}
+              className="rounded-lg backdrop-blur-[2px] p-1 inline-block"
+            >
+              <Moon size={24} />
+            </button>
+          </li>
+        </ul>
+      )}
     </header>
   );
 };

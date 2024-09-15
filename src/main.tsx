@@ -19,8 +19,8 @@ createRoot(document.getElementById("root")!).render(
             style: {
               backgroundColor: "#ffcf",
               color: "#faf",
-              padding: "60px",
-              borderRadius: "8px",
+              padding: "20px",
+              borderRadius: "4px",
               fontSize: "40px",
             },
           }}

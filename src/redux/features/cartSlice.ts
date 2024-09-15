@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import e from "cors";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const initialState = {

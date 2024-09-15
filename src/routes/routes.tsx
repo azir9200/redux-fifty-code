@@ -1,11 +1,12 @@
 import App from "@/App";
 import { createBrowserRouter } from "react-router-dom";
 import About from "../pages/About";
-import Register from "../pages/Register";
-import Login from "../pages/Login";
 import Cart from "../pages/Cart";
 import Home from "../pages/Home";
 import Products from "@/components/ShareComponents/Products";
+import CheckOutPage from "@/pages/Payment/CheckOutPage";
+import Login from "@/pages/User/Login";
+import Register from "@/pages/User/Register";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/checkout",
+        element: <CheckOutPage />,
       },
     ],
   },

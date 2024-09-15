@@ -4,8 +4,8 @@ import { useState } from "react";
 import Modal from "./Modal";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/features/cartSlice";
-// import { toast } from "react-toastify";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }: { product: any }) => {
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ const ProductCard = ({ product }: { product: any }) => {
   };
   const handleAddToCart = (product: any) => {
     dispatch(addToCart(product));
-    toast.success(`${product.name} added to cart!`); 
+    toast.success(`${product.name} added to cart!`);
   };
 
   return (
@@ -55,15 +55,23 @@ const ProductCard = ({ product }: { product: any }) => {
             <p className="text-lg font-bold text-green-600 mb-4">
               {product.price}
             </p>
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handleAddToCart(product);
               }}
-              className="bg-blue-400 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-800 transition duration-300 shadow-md hover:shadow-lg"
+              className="mt-6 bg-green-700 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-800 transition duration-300"
             >
               Add to Cart
             </button>
+
+            <Link
+              to={`/products/${product.id}`}
+              className="bg-blue-400 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-800 transition duration-300 shadow-md hover:shadow-lg"
+            >
+              Show Details
+            </Link>
           </div>
         </div>
       </div>
