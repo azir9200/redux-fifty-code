@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetMeQuery } from "@/redux/api/auth/getMeApi";
+import { Item } from "@/components/types/ProductTypes";
 import { useCreteOrderMutation } from "@/redux/api/orderApi/orderApi";
-import { setUser } from "@/redux/features/userSlice";
 import { useAppSelector } from "@/redux/hooks";
+import { useState } from "react";
 
-const CheckOutPage = () => {
+export default function CheckOutPage() {
   const [createOrder] = useCreteOrderMutation();
-  const cartItems = useAppSelector((store) => store.cart.products);
-  const { data: user } = useGetMeQuery(undefined);
-  console.log("get me", user);
+  // State for user input
+  const [user, setUser] = useState({
+    name: "Fahim Ahammed",
+    email: "fahim@ph.com",
+    phone: "0123456789",
+    address: "Dhaka, Bangladesh",
+  });
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const cartItems = useAppSelector((store) => store.cart.products);
+  // Handle input changes
+  const handleChange = (e: any) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
@@ -21,7 +27,7 @@ const CheckOutPage = () => {
     e.preventDefault();
     const data = {
       user,
-      products: cartItems.map((item: { _id: any; quantity: any }) => ({
+      products: cartItems.map((item: Item) => ({
         product: item._id,
         quantity: item.quantity,
       })),
@@ -29,9 +35,7 @@ const CheckOutPage = () => {
     try {
       const res = await createOrder(data).unwrap();
       if (res.success) {
-        window.location.href = res.data.payment_url;
-        console.log("azir res=>", res);
-        console.log("url go", res.data.payment_url);
+        console.log(res);
       } else {
         console.error("Order creation failed:", res.message);
       }
@@ -39,8 +43,9 @@ const CheckOutPage = () => {
       console.log(error);
     }
   };
+
   return (
-    <div className="max-w-4xl mx-auto pt-14 p-6 bg-white rounded-lg shadow-lg">
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold mb-6">Checkout</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-8 border p-5 rounded">
@@ -53,14 +58,12 @@ const CheckOutPage = () => {
               <input
                 type="text"
                 name="name"
-                value="user.name"
-                // value={user.name}
+                value={user.name}
                 onChange={handleChange}
                 required
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
               />
             </div>
-
             <div>
               <label className="block text-sm font-medium text-gray-700 text-left">
                 Email
@@ -74,7 +77,6 @@ const CheckOutPage = () => {
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"
               />
             </div>
-
             <div>
               <label className="block text-sm font-medium text-gray-700 text-left">
                 Phone
@@ -121,53 +123,13 @@ const CheckOutPage = () => {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map(
-                (item: {
-                  _id: React.Key | null | undefined;
-                  name:
-                    | string
-                    | number
-                    | boolean
-                    | React.ReactElement<
-                        any,
-                        string | React.JSXElementConstructor<any>
-                      >
-                    | Iterable<React.ReactNode>
-                    | React.ReactPortal
-                    | null
-                    | undefined;
-                  quantity:
-                    | string
-                    | number
-                    | boolean
-                    | React.ReactElement<
-                        any,
-                        string | React.JSXElementConstructor<any>
-                      >
-                    | Iterable<React.ReactNode>
-                    | React.ReactPortal
-                    | null
-                    | undefined;
-                  price:
-                    | string
-                    | number
-                    | boolean
-                    | React.ReactElement<
-                        any,
-                        string | React.JSXElementConstructor<any>
-                      >
-                    | Iterable<React.ReactNode>
-                    | React.ReactPortal
-                    | null
-                    | undefined;
-                }) => (
-                  <tr key={item._id} className="border-b">
-                    <td className="py-3 px-4">{item.name}</td>
-                    <td className="py-3 px-4">{item.quantity}</td>
-                    <td className="py-3 px-4">${item.price}</td>
-                  </tr>
-                )
-              )}
+              {cartItems.map((item: Item) => (
+                <tr key={item._id} className="border-b">
+                  <td className="py-3 px-4">{item.name}</td>
+                  <td className="py-3 px-4">{item.quantity}</td>
+                  <td className="py-3 px-4">${item.price}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -183,6 +145,4 @@ const CheckOutPage = () => {
       </form>
     </div>
   );
-};
-
-export default CheckOutPage;
+}

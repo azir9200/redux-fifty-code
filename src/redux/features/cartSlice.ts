@@ -18,8 +18,8 @@ export const cartSlice = createSlice({
       const isExist = state.products.find(
         (product: { _id: any }) => product._id === action.payload._id
       );
-      console.log("isExist", isExist);
-      console.log(action.payload);
+      // console.log("isExist", isExist);
+      // console.log(action.payload);
       if (!isExist) {
         state.products.push({ ...action.payload, quantity: 1 });
       }

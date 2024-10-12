@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import OrderSummary from "../components/ShareComponents/OrderSummary";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import CartDetails from "./CartDetails";
+import OrderSummary from "@/components/ShareComponents/OrderSummary";
 
 const Cart = () => {
   const products = useAppSelector((store) => store.cart.products);
   return (
     <div className="container mt-10 mx-auto">
-      Cart Details
-      <div className="flex lg:flex-row flex-col-reverse justify-center border border-red-600 p-2 lg:space-x-40 ">
+      <div className="flex lg:flex-row flex-col-reverse justify-center p-2 lg:space-x-40 ">
         <div className="space-y-5 lg:mt-0 mt-5">
           {products.length ? (
             products.map((product: any) => (

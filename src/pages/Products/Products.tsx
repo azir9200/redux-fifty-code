@@ -1,6 +1,6 @@
 import { useGetAllProductQuery } from "@/redux/api/product/productApi";
-import ProductCard from "../../pages/Products/ProductCard";
-import { Product } from "../types/ProductTypes";
+import ProductCard from "./ProductCard";
+import { Product } from "@/components/types/ProductTypes";
 
 const Products = () => {
   const { data } = useGetAllProductQuery(undefined);

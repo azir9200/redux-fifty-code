@@ -9,7 +9,7 @@ const OrderSummary = () => {
   const { tax, taxRate, grandTotal, totalPrice, selectedItems } =
     useAppSelector((store) => store.cart);
 
-    // clear cart
+  // clear cart
   const handleClearCart = () => {
     dispatch(clearCart());
   };
@@ -21,7 +21,7 @@ const OrderSummary = () => {
         <p className="text-sm text-dark mt-2">
           Selected Items : {selectedItems}
         </p>
-        
+
         <p className="text-sm text-dark mt-2">
           Total Price : ${totalPrice.toFixed(2)}
         </p>
@@ -47,7 +47,7 @@ const OrderSummary = () => {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            navigate("/stripe-pay");
+            navigate("/checkout");
           }}
           className="bg-green-600 px-3 py-2 text-white  mt-2 rounded-md w-full text-xs flex justify-between items-center"
         >
