@@ -4,7 +4,6 @@ import About from "../pages/About";
 import Cart from "../pages/Cart";
 import Home from "../pages/Home";
 import Products from "@/components/ShareComponents/Products";
-import CheckOutPage from "@/pages/Payment/CheckOutPage";
 import Login from "@/pages/User/Login";
 import Register from "@/pages/User/Register";
 
@@ -38,10 +37,10 @@ export const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
-      {
-        path: "/checkout",
-        element: <CheckOutPage />,
-      },
+      // {
+      //   path: "/stripe-pay",
+      //   element: <StripePay />,
+      // },
     ],
   },
 ]);

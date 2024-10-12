@@ -1,4 +1,3 @@
-// import Banner from "@/components/ShareComponents/Banner";
 import Products from "@/components/ShareComponents/Products";
 
 const Home = () => {

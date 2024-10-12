@@ -1,16 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useGetMeQuery } from "@/redux/api/auth/getMeApi";
 import { useCreteOrderMutation } from "@/redux/api/orderApi/orderApi";
 import { setUser } from "@/redux/features/userSlice";
 import { useAppSelector } from "@/redux/hooks";
 
 const CheckOutPage = () => {
   const [createOrder] = useCreteOrderMutation();
-
   const cartItems = useAppSelector((store) => store.cart.products);
-  const user = useAppSelector((store) => store.user.user);
-  console.log("user ", user);
-  // const register = useAppSelector((store) => store.register);
-  // console.log("user ", user);
+  const { data: user } = useGetMeQuery(undefined);
+  console.log("get me", user);
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     setUser({
@@ -55,7 +53,8 @@ const CheckOutPage = () => {
               <input
                 type="text"
                 name="name"
-                value={user.name}
+                value="user.name"
+                // value={user.name}
                 onChange={handleChange}
                 required
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500"

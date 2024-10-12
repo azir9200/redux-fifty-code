@@ -5,13 +5,13 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 
 const CartDetails = ({ product }: any) => {
   const dispatch = useAppDispatch();
-  const handleQuantity = (type: string, id: string) => {
-    const payload = { type, id };
+  const handleQuantity = (type: string, _id: string) => {
+    const payload = { type, _id };
     dispatch(updateQuantity(payload));
   };
 
-  const handleRemove = (id: string) => {
-    dispatch(removeFromCart({ id }));
+  const handleRemove = (_id: string) => {
+    dispatch(removeFromCart({ _id }));
   };
 
   return (

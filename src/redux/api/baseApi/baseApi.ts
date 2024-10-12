@@ -10,22 +10,14 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 
-// export const baseApi = createApi({
-//   reducerPath: "baseApi",
-//   baseQuery: fetchBaseQuery({
-//     baseUrl: "http://localhost:5000/api",
-//   }),
-//   endpoints: () => ({}),
-// });
-
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).user.token;
-
+    console.log("token", token);
     if (token) {
-      headers.set("authorization", `${token}`);
+      headers.set("Authorization", `${token}`);
     }
     return headers;
   },
@@ -65,6 +57,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
+
   baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
 });

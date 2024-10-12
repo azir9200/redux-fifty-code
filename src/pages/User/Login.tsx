@@ -18,10 +18,12 @@ const Login = () => {
     e.preventDefault();
     try {
       const result = await login({ email, password });
-      const { success, data } = result?.data || {};
 
-      if (success && data?.accessToken) {
-        const { accessToken } = data;
+      const { success, data } = result?.data || {};
+      console.log("object,", data?.token);
+
+      if (success && data?.token) {
+        const { accessToken } = data.token;
         console.log("User access token:", accessToken);
 
         toast.success("Login Successful!", {
